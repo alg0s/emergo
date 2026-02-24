@@ -1,0 +1,45 @@
+name: Deploy Site
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "index.html"
+      - "*.css"
+      - "*.js"
+      - "assets/**"
+      - "scripts/deploy.sh"
+      - ".github/workflows/deploy.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Configure SSH
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p ~/.ssh
+          printf '%s\n' "${{ secrets.VPS_KNOWN_HOSTS }}" > ~/.ssh/known_hosts
+          printf '%s\n' "${{ secrets.ACTIONS_DEPLOY_KEY }}" > ~/.ssh/emergo_actions
+          chmod 600 ~/.ssh/emergo_actions ~/.ssh/known_hosts
+
+      - name: Deploy
+        shell: bash
+        env:
+          DEPLOY_HOST: ${{ secrets.VPS_HOST }}
+          DEPLOY_USER: ${{ secrets.VPS_USER }}
+          DEPLOY_PORT: ${{ secrets.VPS_PORT }}
+          SSH_KEY_PATH: /home/runner/.ssh/emergo_actions
+        run: |
+          chmod +x scripts/deploy.sh
+          scripts/deploy.sh
+
