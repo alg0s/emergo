@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Emergo | Hello World</title>
+  <style>
+    :root {
+      --bg: #f2eee7;
+      --ink: #101010;
+      --muted: #5a554f;
+      --accent: #d54f3a;
+      --card: rgba(255, 255, 255, 0.62);
+      --ring: rgba(16, 16, 16, 0.08);
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      display: grid;
+      place-items: center;
+      padding: 24px;
+      color: var(--ink);
+      background:
+        radial-gradient(circle at 12% 18%, rgba(213, 79, 58, 0.18), transparent 36%),
+        radial-gradient(circle at 88% 82%, rgba(16, 16, 16, 0.07), transparent 42%),
+        repeating-linear-gradient(
+          0deg,
+          rgba(16, 16, 16, 0.025) 0 1px,
+          transparent 1px 14px
+        ),
+        var(--bg);
+      font-family: Georgia, "Times New Roman", serif;
+    }
+
+    .panel {
+      width: min(720px, 100%);
+      border: 1px solid var(--ring);
+      background: var(--card);
+      backdrop-filter: blur(8px);
+      border-radius: 20px;
+      padding: clamp(28px, 5vw, 48px);
+      box-shadow: 0 20px 60px rgba(16, 16, 16, 0.09);
+    }
+
+    .eyebrow {
+      margin: 0 0 10px;
+      font-size: 0.82rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    h1 {
+      margin: 0;
+      font-size: clamp(2.4rem, 8vw, 5rem);
+      line-height: 0.95;
+      font-weight: 600;
+    }
+
+    h1 span {
+      color: var(--accent);
+      font-style: italic;
+    }
+
+    p {
+      margin: 18px 0 0;
+      max-width: 45ch;
+      color: var(--muted);
+      font-size: 1.05rem;
+      line-height: 1.55;
+    }
+  </style>
+</head>
+<body>
+  <main class="panel">
+    <p class="eyebrow">Emergo</p>
+    <h1>Hello, <span>World.</span></h1>
+    <p>
+      A minimal static page deployed from the <code>emergo</code> repository.
+    </p>
+  </main>
+</body>
+</html>
